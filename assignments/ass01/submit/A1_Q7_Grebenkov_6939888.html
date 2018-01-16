@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>University Registration and Survey</title>
+    </head>
+
+    <body>
+        <form method="post">
+            <h1>University Registration Form</h1>
+            <p>
+                <label>First Name:
+                    <input type="text" id="firstName" 
+                        placeholder="First name" />
+                </label>
+            </p>
+
+            <p>
+                <label>Last Name:
+                    <input type="text" id="lastName" 
+                        placeholder="Last name" />
+                </label>
+            </p>
+
+            <p>
+                <label>E-mail:
+                    <input type="email" id="email" 
+                        placeholder="name@domain.com" required />
+                </label>
+            </p>
+
+            <details>   
+                <summary>Optional Survey</summary>
+                <p>
+                    <label for="yearInUni">Year in University:
+                        <input type="text" id="yearInUni"
+                            placeholder="Select university year" list="uniYears" />
+                        <datalist id="uniYears">
+                            <option value="Not yet in university">
+                            <option value="Freshman">
+                            <option value="Sophomore">
+                            <option value="Junior">
+                            <option value="Senior">
+                            <option value="Graduate">
+                        </datalist>
+                    </label>
+                </p>
+            </details>
+
+            <p>
+                <input type="submit" value="Submit" />
+                <input type="reset" value="Reset" />
+            </p>
+        </form>
+    </body>
+</html>
+
