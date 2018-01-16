@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Autocomplete + Datalist</title>
+    </head>
+
+    <body>
+        <form method="post" autocomplete="on">
+            <p>
+                <label>Text:
+                    <input type="text" id="textBox" 
+                        placeholder="Enter some text..." />
+                </label>
+            </p>
+            <p>
+                <label for="dayOfWeekList">Day of the Week:
+                    <input type="text" id="dayOfWeekList"
+                        placeholder="Select the day of the week" list="days" />
+                    <datalist id="days">
+                        <option value="Monday">
+                        <option value="Tuesday">
+                        <option value="Wednesday">
+                        <option value="Thursday">
+                        <option value="Friday">
+                        <option value="Saturday">
+                        <option value="Sunday">
+                    </datalist>
+                </label>
+            </p>
+            <p>
+                <input type="submit" value="Submit" />
+                <input type="reset" value="Reset" />
+            </p>
+        </form>
+    </body>
+</html>
+
