@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>University Feedback Form</title>
+    </head>
+
+    <body>
+        <h1>University Feedback Form</h1>
+
+        <p>
+            <strong>Please fill out this form to provide feedback 
+                regarding your campus visit.</strong>
+        </p>
+        
+        <form method="post" action="http://www.deitel.com">
+            <!-- Name field -->
+            <p>
+                <label>Name:
+                    <input name="name" type="text" size="35" maxlength="60">
+                </label>
+            </p> 
+
+            <!-- E-mail field -->
+            <p>
+                <label>E-mail:
+                    <input name="e-mail" type="text" size="35" maxlength="60">
+                </label>
+            </p>
+            
+            <!-- Things most liked on campus checkboxes -->
+            <p>
+                <strong>What did you like most about the campus?</strong><br>
+
+                <label>
+                    <input name="thingsliked" type="checkbox" 
+                        value="Campus">
+                    Campus
+                </label><br>
+
+                <label>
+                    <input name="thingsliked" type="checkbox" 
+                        value="Students">
+                    Students 
+                </label><br>
+
+                <label>
+                    <input name="thingsliked" type="checkbox" 
+                        value="Location">
+                    Location 
+                </label><br>
+
+                <label>
+                    <input name="thingsliked" type="checkbox" 
+                        value="Atmosphere">
+                    Atmosphere 
+                </label><br>
+
+                <label>
+                    <input name="thingsliked" type="checkbox" 
+                        value="Dorm rooms">
+                    Dorm rooms 
+                </label><br>
+
+                <label>
+                    <input name="thingsliked" type="checkbox" 
+                        value="Sports">
+                    Sports 
+                </label>
+            </p>
+
+            <!-- How the student became interested radio buttons -->
+            <p>
+                <strong>How did you become interested in the university?</strong><br>
+
+                <label>
+                    <input name="howinterested" type="radio"
+                        value="Friends">
+                    Friends
+                </label><br>
+
+                <label>
+                    <input name="howinterested" type="radio"
+                        value="Television">
+                    Television
+                </label><br>
+
+                <label>
+                    <input name="howinterested" type="radio"
+                        value="Internet">
+                    Internet 
+                </label><br>
+
+                <label>
+                    <input name="howinterested" type="radio"
+                        value="Other">
+                    Other 
+                </label>
+            </p>
+
+            <!-- Additional comments textarea -->
+            <p>
+                <strong>Please enter any additional comments below:</strong><br>
+
+                <label>
+                    <textarea name="comments" rows="10" cols="55"></textarea>
+                </label>
+            </p>
+
+            <!-- Submit/Reset buttons -->
+            <p>
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset">
+            </p>
+        </form>
+    </body>
+</html>
+
