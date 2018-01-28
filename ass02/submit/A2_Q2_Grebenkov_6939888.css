@@ -1,0 +1,25 @@
+body                { background: black; }
+div.divCenter       { text-align: center; }
+
+div.divButton       { text-align: center; 
+                      display: inline-block;
+                      background: blue; 
+                      color: limegreen; 
+                      border: 1px solid white;
+                      border-radius: 5px; }
+                   
+div.divButton:hover { background: darkblue; 
+                      color: yellow; 
+                      border: 1px solid limegreen; }
+
+a.aButton           { color: white; 
+                      text-decoration: none; 
+                      display: inline-block; 
+                      padding: 0.5em;
+                      height: 100%; }
+
+a.aButton:visited   { color: white; }
+
+a.aButton:hover     { color: limegreen; 
+                      text-decoration: underline; }
+
