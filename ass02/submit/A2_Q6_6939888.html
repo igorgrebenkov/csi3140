@@ -3,24 +3,66 @@
 <html>
     <head>
         <meta charset = "utf-8">
-        <title>Question 5</title>
+        <title>Question 6</title>
         <script type = "text/javascript">
-            <!--
-            var num1; // first number entered by user
-            var num2; // second number entered by user
             
-            // Get first and second number from the user
-            num1 = parseInt(window.prompt("Enter the first integer"));
-            num2 = parseInt(window.prompt("Please Enter second integer"));
+            // Flag that is true when user input is valid.
+            // i.e. It is a five-digit integer and the first digit is not zero.
+            var isValid = false;
             
-            // If num1 is a multiple of num2, then num1 divided by num2 will 
-            // have a remainder of 0. We display the result of this check. 
-            if (num1 % num2 == 0) {
-                document.writeln(num1 + " is a multiple of " + num2 + "!");
-            } else {
-                document.writeln(num1 + " is not a multiple of " + num2 + "!");
+            // We keep asking the user for input until they enter a valid integer.
+            while (!isValid) {
+                var digitString = window.prompt("Please enter a 5-digit integer" +
+                    " not starting with 0.");
+                /*
+                 * Check if the last input was valid:
+                 *   1. It has 5 digits.
+                 *   2. Its first digit is not zero.
+                 *   3. It's an integer.
+                 */
+                isValid = digitString.length == 5 && 
+                    digitString.charAt(0) != 0 && !isNaN(digitString);
+                
+                // Present an alert to the user if the number is invalid.
+                if (!isValid) {
+                    window.alert("Error: you have entered an invalid integer.\n" +
+                        "Please try again.");
+                }
             }
-            // -->
+            
+            /*
+             * We check if the user's string is a palindrome with the pointer
+             * variables left and right which initially point to the leftmost and 
+             * rightmost characters of the string, respectively. Since a palindrome 
+             * is symmetric, we check at each iteration whether the character 
+             * pointed to by left is equal to the character pointed to by right, 
+             * then increment left, and decrement right. If at any iteration this 
+             * condition is violated, we set the flag isPalindrome to false and 
+             * break. Otherwise, we continue until the left pointer is to the 
+             * left of, or has passed, the right pointer, indicating that the 
+             * number is indeed a palindrome.
+             */
+            var left = 0;
+            var right = digitString.length - 1;
+            var isPalindrome = true;
+
+            while (left < right) {
+                if (digitString.charAt(left) != digitString.charAt(right)) {
+                    isPalindrome = false;
+                    break;
+                }
+                left++;
+                right--;
+            }
+
+            // Indicate to the user whether the digit is a palindrome or not.
+            if (isPalindrome) {
+                document.writeln("The digit " + digitString + 
+                    " is a palindrome!");
+            } else {
+                document.writeln("The digit " + digitString + 
+                    " is <em>not</em> a palindrome!");
+            }
         </script>
     </head>
     <body></body>
