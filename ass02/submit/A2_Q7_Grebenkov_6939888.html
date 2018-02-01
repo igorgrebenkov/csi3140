@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Question 7</title>
+        <script type = "text/javascript">
+           
+            // We use this array to keep a running total of each product's total sales.
+            var productSales = [0, 0, 0, 0, 0]; 
+
+            do {
+                // Flag used to validate input.
+                var isValid = false;
+                
+                // We keep asking for user input until it is valid.
+                while (!isValid) {
+                    // Input is in the form of a pair of space separated numbers.
+                    var input = window.prompt("Enter a product number and quantity " +
+                        "as a space separated pair of numbers (or -1 to quit). " +
+                        "e.g. if product 2 was sold 3 times, enter '2 3'.");
+
+                    var productNo = parseInt(input.charAt(0));
+                    var quantity = parseInt(input.charAt(2));
+                    
+                    /*
+                     * Input is valid if either 
+                     * (1) The user inputs "-1", OR
+                     * (2) The user input is a string of length 3, the 2nd character
+                     *     is a space, the product number is between 1 and 5, and
+                     *     the quantity is greater than 0.
+                     */
+                    isValid = (input == "-1") || 
+                        (productNo >= 1 && productNo <= 5 && quantity >= 0 && 
+                            input.charAt(1) == " " && input.length);
+
+                    // Notify the user if input is valid.
+                    if (!isValid) {
+                        window.alert("Error: invalid input. Please try again.");
+                    }
+                }
+                
+                // Now that we have valid user input, we update the running total 
+                // for that product.
+                switch (productNo) {
+                    case 1:
+                        productSales[0] += quantity*2.98;
+                        break;
+                    case 2:
+                        productSales[1] += quantity*4.50;
+                        break;
+                    case 3:
+                        productSales[2] += quantity*9.98;
+                        break;
+                    case 4: 
+                        productSales[3] += quantity*4.49;
+                        break;
+                    case 5:
+                        productSales[4] += quantity*6.87;
+                        break;
+                }
+
+            } while (input != "-1") // Get user input until sentintel value entered.
+            
+            // Print the table.
+            document.write("<table border = '1'>");
+            document.write("<thead><tr><th>Product #</th>" + 
+                "<th>Total Sales</th></tr></thead>");
+            document.write("<tbody>"); 
+
+            for (var i = 0; i < productSales.length; i++) {
+                document.write("<tr>");
+                document.write("<td>" + (i+1) + "</td>");
+                document.write("<td>" + productSales[i] + "</td>");
+                document.write("</tr>");
+            }
+
+            document.write("</tbody></table>");
+        </script>
+    </head>
+    <body></body>
+</html>
