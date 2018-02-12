@@ -32,7 +32,7 @@
                      */
                     isValid = (input == "-1") || 
                         (productNo >= 1 && productNo <= 5 && quantity >= 0 && 
-                            input.charAt(1) == " " && input.length);
+                            input.charAt(1) == " " && input.length == 3);
 
                     // Notify the user if input is valid.
                     if (!isValid) {
