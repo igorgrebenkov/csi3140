@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Question 1</title>
+        <script>
+            // Constants used to identify units for the input temperature.
+            var CELSIUS = true;
+            var FAHRENHEIT = false;
+
+            function start() {
+                var btnCelsiusToFahr = document.getElementById("celsiusToFahr");
+                var btnFahrToCelsius = document.getElementById("fahrToCelsius");
+                
+                btnCelsiusToFahr.addEventListener(
+                    "click", convertToFahr, false);
+                btnFahrToCelsius.addEventListener(
+                    "click", convertToCelsius, false);
+            }
+           
+            /**
+             * Converts input temperature from Celsius to Fahrenheit
+             * and displays the result.
+             */
+            function convertToFahr() {
+                var userTemp = parseInt(
+                    document.getElementById("userInput").value);
+                showTemp(fahrenheit(userTemp), userTemp, CELSIUS);
+            }
+
+            /**
+             * Converts input temperature from Fahrenheit to Celsius
+             * and displays the result.
+             */
+            function convertToCelsius() {
+                var userTemp = parseInt(
+                    document.getElementById("userInput").value);
+                showTemp(celsius(userTemp), userTemp, FAHRENHEIT);
+            }
+            
+            /**
+             * Displays the result of a conversion in a div.
+             * 
+             * Parameters: 
+             *     outTemp    result of conversion 
+             *     inTemp     user input temperature
+             *     inUnits    user input units (CELSIUS or FAHRENHEIT)
+             */
+            function showTemp(outTemp, inTemp, inUnits) {
+                var resultDiv = document.getElementById("conversionResultDiv");
+                
+                switch (inUnits) {
+                    case CELSIUS:
+                        resultDiv.innerHTML = inTemp + " Celsius is " + 
+                            outTemp.toFixed(2) + " Fahrenheit.";
+                        break;
+                    case FAHRENHEIT:
+                        resultDiv.innerHTML = inTemp + " Fahrenheit is " + 
+                            outTemp + " Celsius.";
+                        break;
+                }
+            }
+            
+            /**
+             * Returns the result of converting tempFahr from
+             * Celsius to Fahrenheit.
+             */
+            function celsius(tempFahr) {
+                return (5.0 / 9.0) * (tempFahr - 32);
+            }
+            
+            /**
+             * Returns the result of converting tempFahr from
+             * Fahrenheit to Celsius.
+             */
+            function fahrenheit(tempCelsius) {
+                return (9.0 / 5.0 * tempCelsius) + 32;
+            }
+
+            window.addEventListener("load", start, false);
+        </script>
+    </head>
+    <body>
+        <h4>Please enter a temperature below:</h4>
+        <form action="#">
+            <input id="userInput" type="text"> 
+            <input id="celsiusToFahr" type="button" value="C to F">
+            <input id="fahrToCelsius" type="button" value="F to C">
+        </form>
+        <div id="conversionResultDiv"></div>
+        <div id="testDiv"></div>
+    </body>
+</html>
