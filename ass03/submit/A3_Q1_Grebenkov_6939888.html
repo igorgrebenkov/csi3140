@@ -42,16 +42,18 @@
             function showTemp(outTemp, inTemp, inUnits) {
                 var resultDiv = document.getElementById("conversionResultDiv");
                 
+                resultDiv.innerHTML = "<p>"
                 switch (inUnits) {
                     case CELSIUS:
-                        resultDiv.innerHTML = inTemp + " Celsius is " + 
-                            outTemp.toFixed(2) + " Fahrenheit.";
+                        resultDiv.innerHTML += inTemp + " Celsius is " + 
+                            outTemp + " Fahrenheit.";
                         break;
                     case FAHRENHEIT:
-                        resultDiv.innerHTML = inTemp + " Fahrenheit is " + 
+                        resultDiv.innerHTML += inTemp + " Fahrenheit is " + 
                             outTemp + " Celsius.";
                         break;
                 }
+                resultDiv.innerHTML += "</p>"
             }
             
             function celsius(tempFahr) {

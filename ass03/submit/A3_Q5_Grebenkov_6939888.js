@@ -4,18 +4,19 @@ const UPPER = 1;        // index to upper range in enum arrays
 const MOVE = 2;         // index to actual move in enum arrays
 
 /* 
- * Enum-like structures for moves
- *   First element is lower bound
- *   Second element is upper bound
- *   Third element is the actual move
+ * Simple objects that store move info for the tortoise and hare.
+ * For each array:
+ *   The 1st element is the lower bound
+ *   The 2nd element is the upper bound
+ *   The 3rd element is the actual move
  */
-const tortoiseEnum = {
+const tortoiseMoves = {
     FAST_PLOD: [1, 5, 3],
     SLIP: [6, 7, -6],
     SLOW_PLOD: [8, 10, 1]
 };
 
-const hareEnum = {
+const hareMoves = {
     SLEEP: [1, 2, 0],
     BIG_HOP: [3, 4, 9],
     BIG_SLIP: [5, 5, -12],
@@ -30,14 +31,13 @@ var raceLength;  // length of the race
 var numTicks;    // counter for number of ticks in simulation
 
 function start() {
-    initRace();
-
     var startBtn = document.getElementById("startBtn");
     startBtn.addEventListener("click", startRace, false);
+
+    initRace();
 }
 
 function initRace() {
-    var raceOuput = document.getElementById("raceOutput");
     tortoisePos = 1;
     harePos = 1;
     numTicks = 0;
@@ -78,26 +78,26 @@ function startRace() {
     }
     
     // display stats and reset race
-    raceOutput.innerHTML += "<p><strong>Time Elapsed: " 
-        + numTicks + " ticks</strong><br>";
+    raceOutput.innerHTML += "<p><strong>Time Elapsed: " + 
+        numTicks + " ticks</strong><br>";
     raceOutput.innerHTML += "<strong>Press 'Start Race' " + 
         "to run again.</strong><br></p>";
     initRace(); 
 }
 
 function moveTortoise(randNum) {
-    if (randNum >= tortoiseEnum.FAST_PLOD[LOWER] && 
-        randNum <= tortoiseEnum.FAST_PLOD[UPPER]) {
+    if (randNum >= tortoiseMoves.FAST_PLOD[LOWER] && 
+        randNum <= tortoiseMoves.FAST_PLOD[UPPER]) {
         // fast plod
-        tortoisePos += tortoiseEnum.FAST_PLOD[MOVE];
-    } else if (randNum >= tortoiseEnum.SLIP[LOWER] && 
-               randNum <= tortoiseEnum.SLIP[UPPER]) {
+        tortoisePos += tortoiseMoves.FAST_PLOD[MOVE];
+    } else if (randNum >= tortoiseMoves.SLIP[LOWER] && 
+               randNum <= tortoiseMoves.SLIP[UPPER]) {
         // slip
-        tortoisePos += tortoiseEnum.SLIP[MOVE];
-    } else if (randNum >= tortoiseEnum.SLOW_PLOD[LOWER] && 
-               randNum <= tortoiseEnum.SLOW_PLOD[UPPER]) {
+        tortoisePos += tortoiseMoves.SLIP[MOVE];
+    } else if (randNum >= tortoiseMoves.SLOW_PLOD[LOWER] && 
+               randNum <= tortoiseMoves.SLOW_PLOD[UPPER]) {
         // slow plod
-        tortoisePos += tortoiseEnum.SLOW_PLOD[MOVE];
+        tortoisePos += tortoiseMoves.SLOW_PLOD[MOVE];
     }
  
     // check for slipping off the course
@@ -107,26 +107,26 @@ function moveTortoise(randNum) {
 }
 
 function moveHare(randNum) {
-    if (randNum >= hareEnum.SLEEP[LOWER] && 
-        randNum <= hareEnum.SLEEP[UPPER]) {
+    if (randNum >= hareMoves.SLEEP[LOWER] && 
+        randNum <= hareMoves.SLEEP[UPPER]) {
         // sleep
-        harePos += hareEnum.SLEEP[MOVE];
-    } else if (randNum >= hareEnum.BIG_HOP[LOWER] && 
-               randNum <= hareEnum.BIG_HOP[UPPER]) {
+        harePos += hareMoves.SLEEP[MOVE];
+    } else if (randNum >= hareMoves.BIG_HOP[LOWER] && 
+               randNum <= hareMoves.BIG_HOP[UPPER]) {
         // big hop 
-        harePos += hareEnum.BIG_HOP[MOVE];
-    } else if (randNum >= hareEnum.BIG_SLIP[LOWER] && 
-               randNum <= hareEnum.BIG_SLIP[UPPER]) {
+        harePos += hareMoves.BIG_HOP[MOVE];
+    } else if (randNum >= hareMoves.BIG_SLIP[LOWER] && 
+               randNum <= hareMoves.BIG_SLIP[UPPER]) {
         // big slip
-        harePos += hareEnum.BIG_SLIP[MOVE];
-    } else if (randNum >= hareEnum.SMALL_HOP[LOWER] && 
-               randNum <= hareEnum.SMALL_HOP[UPPER]) {
+        harePos += hareMoves.BIG_SLIP[MOVE];
+    } else if (randNum >= hareMoves.SMALL_HOP[LOWER] && 
+               randNum <= hareMoves.SMALL_HOP[UPPER]) {
         // small hop
-        harePos += hareEnum.SMALL_HOP[MOVE];
-    } else if (randNum >= hareEnum.SMALL_SLIP[LOWER] && 
-               randNum <= hareEnum.SMALL_SLIP[UPPER]) {
+        harePos += hareMoves.SMALL_HOP[MOVE];
+    } else if (randNum >= hareMoves.SMALL_SLIP[LOWER] && 
+               randNum <= hareMoves.SMALL_SLIP[UPPER]) {
         // small slip
-        harePos += hareEnum.SMALL_SLIP[MOVE];
+        harePos += hareMoves.SMALL_SLIP[MOVE];
     }
 
     // check for slipping off the course
@@ -138,22 +138,21 @@ function moveHare(randNum) {
 // prints one iteration of the race
 function printRace() {
     var raceOutput = document.getElementById("raceOutput");
-    var raceString;
+    var raceString = "";
     
-    raceString = "<strong>Start|</strong>"; 
     for (var i = 1; i <= RACE_LENGTH; i++) {
         if (tortoisePos === harePos && 
             tortoisePos === i) {
-            raceString += "OUCH!!!"
+            raceString += "OUCH!!!";
         } else if (i === tortoisePos) {
             raceString += "T";
         } else if (i === harePos) {
-            raceString += "H"
+            raceString += "H";
         } else {
             raceString += " ";
         }
     }
-    raceString += "<strong>|Finish</strong><br>"; 
+    raceString += "<br>"
     raceOutput.innerHTML += raceString;
 }
 

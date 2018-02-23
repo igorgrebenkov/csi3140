@@ -14,17 +14,25 @@
                 initGame();
             }
             
+            function initGame() {
+                randomNum = getRandomInt();
+                numGuesses = 0;
+            }
+
             function checkGuess() {
                 var userGuess = parseInt(
                     document.getElementById("userGuess").value);
                 var outputDiv = document.getElementById("outputDiv");
 
-                numGuesses++; // new for question 3
-
+                // new for question 3
                 if (isNaN(userGuess) || userGuess < 1 || userGuess > 1000) {
                     outputDiv.innerHTML = "Wrong input! " +
                         "You should enter a number between 1 and 1000.";
-                } else if (userGuess > randomNum) {
+                } else {
+                    numGuesses++; 
+                }
+                
+                if (userGuess > randomNum) {
                     outputDiv.innerHTML = "Too high. Try again.";
                 } else if (userGuess < randomNum) {
                     outputDiv.innerHTML = "Too low. Try again.";
@@ -42,19 +50,11 @@
                     } else {
                         outputDiv.innerHTML += "<br>Ahah! You know the secret!";
                     }
-
                     initGame(); // reset the game
                 }
             }
             
-            function initGame() {
-                randomNum = getRandomInt();
-                numGuesses = 0;
-            }
-            
-            /*
-             * Returns a random integer between 1 and 1000.
-             */
+            // Returns a random integer between 1 and 1000.
             function getRandomInt() {
                 return Math.floor(1 + Math.random() * 1000);
             }

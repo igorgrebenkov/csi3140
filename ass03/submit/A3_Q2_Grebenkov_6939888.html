@@ -13,6 +13,10 @@
                 initGame();
             }
             
+            function initGame() {
+                randomNum = getRandomInt();
+            }
+
             function checkGuess() {
                 var userGuess = parseInt(
                     document.getElementById("userGuess").value);
@@ -32,13 +36,7 @@
                 }
             }
             
-            function initGame() {
-                randomNum = getRandomInt();
-            }
-            
-            /*
-             * Returns a random integer between 1 and 1000.
-             */
+            // returns a random integer between 1 and 1000.
             function getRandomInt() {
                 return Math.floor(1 + Math.random() * 1000);
             }

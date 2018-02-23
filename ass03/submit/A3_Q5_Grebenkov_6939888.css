@@ -3,5 +3,6 @@
 }
 
 #raceOutput {
+    /* respects white space so we can show race output properly */
     white-space: pre-wrap;
 }

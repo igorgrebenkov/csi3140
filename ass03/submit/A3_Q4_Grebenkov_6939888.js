@@ -1,4 +1,3 @@
-
 /* We want a count of the # of primes before we output them,
  * so we start by assuming all numbers between 2 and 999 are 
  * prime, and then decrement each time we disqualify a number.
@@ -12,9 +11,7 @@ function start() {
     runSieve();
 }
 
-/*
- * Implements the Sieve of Eratosthenes algorithm. 
- */ 
+// implements the Sieve of Eratosthenes algorithm. 
 function runSieve() {
     // initialization
     sieveArr[0] = 0;
@@ -34,13 +31,10 @@ function runSieve() {
             }
         }
     }
-
     outputResult();
 }
 
-/*
- * Print the result in a pretty table. 
- */
+// print the result in a pretty table. 
 function outputResult() {
     var resultDiv = document.getElementById("resultDiv");
     var result = "<p><strong>There are " + numPrimes + 
@@ -60,7 +54,7 @@ function outputResult() {
             numPrinted++;
 
             if (numPrinted % numTableCols === 0) {
-                result += "</tr>"
+                result += "</tr>";
             }
         }
     }
