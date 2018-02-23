@@ -1,0 +1,72 @@
+
+/* We want a count of the # of primes before we output them,
+ * so we start by assuming all numbers between 2 and 999 are 
+ * prime, and then decrement each time we disqualify a number.
+ */
+var numPrimes = 998;  
+
+var sieveArr = new Array(1000);
+var arrLength = sieveArr.length;
+
+function start() {
+    runSieve();
+}
+
+/*
+ * Implements the Sieve of Eratosthenes algorithm. 
+ */ 
+function runSieve() {
+    // initialization
+    sieveArr[0] = 0;
+    sieveArr[1] = 0;
+    for (var i = 2; i < arrLength; i++) {
+        sieveArr[i] = 1;
+    }
+    
+    // sieve the array 
+    for (var i = 2; i < arrLength; i++) {
+        if (sieveArr[i] === 1) {
+            for (var j = i + 1; j < arrLength; j++) {
+                if (sieveArr[j] !== 0 && j % i === 0) {
+                    sieveArr[j] = 0;
+                    numPrimes--;
+                }
+            }
+        }
+    }
+
+    outputResult();
+}
+
+/*
+ * Print the result in a pretty table. 
+ */
+function outputResult() {
+    var resultDiv = document.getElementById("resultDiv");
+    var result = "<p><strong>There are " + numPrimes + 
+        " prime numbers between 1 and 999:</strong></p>";
+    
+    var numTableCols = 12; // number of columns in the table
+    var numPrinted = 0; // counts number of primes printed
+    
+    result += "<table>";
+    for (var i = 2; i < arrLength; i++) {
+        if (sieveArr[i] === 1) {
+            if (numPrinted % numTableCols === 0) {
+                result += "<tr>";
+            }
+
+            result += "<td>" + i + "</td>";
+            numPrinted++;
+
+            if (numPrinted % numTableCols === 0) {
+                result += "</tr>"
+            }
+        }
+    }
+    result += "</table>";
+
+    resultDiv.innerHTML = result;
+}
+
+window.addEventListener("load", start, false);
