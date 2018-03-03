@@ -1,7 +1,7 @@
 const RACE_LENGTH = 70; // length of the race.
-const LOWER = 0;        // index to lower range in enum arrays
-const UPPER = 1;        // index to upper range in enum arrays
-const MOVE = 2;         // index to actual move in enum arrays
+const LOWER = 0;        // index to lower range in move arrays
+const UPPER = 1;        // index to upper range in move arrays
+const MOVE = 2;         // index to actual move in move arrays
 
 /* 
  * Simple objects that store move info for the tortoise and hare.
@@ -26,7 +26,6 @@ const hareMoves = {
 
 var tortoisePos; // tortoise position
 var harePos;     // hare position
-var raceCourse;  // race course array
 var raceLength;  // length of the race
 var numTicks;    // counter for number of ticks in simulation
 
