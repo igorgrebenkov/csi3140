@@ -1,0 +1,29 @@
+div 
+{
+    border: 1px solid blue;
+    padding: 1%;
+}
+
+table 
+{
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+td 
+{
+    border: 3px solid black;
+}
+
+img
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form 
+{
+    border: 1px solid black;
+}

@@ -41,10 +41,6 @@ function initBoard() {
     // (0 indicates the blank cell)
     var boardNumbers = getShuffledArray();
     
-    // set of board numbers 1 position away from a win
-    // useful for testing the win condition
-    // var boardNumbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
-
     // used to index each cell in boardNumbers
     var cellIndex = 0; 
 
