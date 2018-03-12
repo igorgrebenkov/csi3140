@@ -1,13 +1,14 @@
 var board; // table body that represents the board
 var blankPosition; // [row, column] index array for the blank   
 var blankNode; // DOM node for the blank position
+var dimension = 4; // board row/col dimension
 
 // creates the board, registers the event listeners,
-// and populates the board 
+// and populates the board to start a game 
 function start() {
     board = document.getElementById("boardBody");
-
-    var dimension = 4; 
+    document.getElementById("playAgainBtn").addEventListener(
+        "click", initBoard, false);
     
     // create the table for the board
     for (var i = 0; i < dimension; i++) {
@@ -29,9 +30,20 @@ function start() {
 // initializes the board by randomly populating the  
 // table with integers from 1 to 15
 function initBoard() {
+    // hide the play again button
+    document.getElementById("playAgainBtn").setAttribute(
+        "style", "display: none;");
+
+    // clear the message paragraph
+    document.getElementById("messagePar").innerHTML = "";
+
     // get a shuffled array of numbers from 0 to 15.
     // (0 indicates the blank cell)
     var boardNumbers = getShuffledArray();
+    
+    // set of board numbers 1 position away from a win
+    // useful for testing the win condition
+    // var boardNumbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0];
 
     // used to index each cell in boardNumbers
     var cellIndex = 0; 
@@ -48,11 +60,42 @@ function initBoard() {
                 // and color it white
                 blankPosition = [row, cell];
                 blankNode = rowCells[cell];
+                blankNode.innerHTML = "";
                 blankNode.setAttribute("class", "whiteCell");
             } 
             cellIndex++;
         }
     }
+}
+
+// returns true if the game is over (numbers are in order)
+function isGameOver() {
+    var currNum = 1;
+    
+    // loop through the table cells, checking at each
+    // iteration whether the counter currNum is equal
+    // to the value in the cell
+    for (var row = 0; row < board.rows.length; row++) {
+        var rowCells = board.rows[row].cells;
+
+        for (var cell = 0; cell < rowCells.length; cell++) {
+            cellNum = parseInt(rowCells[cell].innerHTML);
+
+            // We ignore the last position since it must 
+            // be blank anyways
+            if (row === dimension - 1 && cell === dimension-1) {
+                continue;
+            }
+            
+            // we return false whenever we find a cell
+            // whose number is out of sequence
+            if (cellNum !== currNum) {
+                return false; 
+            }
+            currNum++;
+        }
+    }
+    return true;
 }
 
 // handles 'mousedown' events for the table cells.
@@ -93,6 +136,12 @@ function handleCellClick(e) {
         blankNode = clickedCellNode;
         blankPosition = [i, j];
         messagePar.innerHTML = ""; // clear messages
+            
+        if (isGameOver()) {
+            messagePar.innerHTML = "<strong>You won!</strong><br>";
+            // show the play again button
+            document.getElementById("playAgainBtn").setAttribute("style", "display: block;");
+        }
     } else {
         messagePar.innerHTML ="<strong>Invalid move!</strong><br>" +
             "You must click on a square adjacent to the blank one.";
@@ -123,7 +172,6 @@ function getShuffledArray() {
 // returns a random number between 0 and max
 function randNum(max) {
     return Math.floor(Math.random() * max);
-
 }
 
 window.addEventListener("load", start, false);

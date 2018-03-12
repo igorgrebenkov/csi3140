@@ -1,0 +1,42 @@
+h1          
+{  
+    text-align: center; 
+}
+
+#playAgainBtn 
+{
+    margin: auto;
+}
+
+#boardTable 
+{ 
+    border: 1px solid black; 
+    border-collapse: collapse; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+td          
+{ 
+    border: 3px solid white; 
+    height: 60px;
+    width: 60px; 
+    text-align: center; 
+    font-weight: bold;
+    font-size: 150%;
+}
+
+td.blackCell {
+    background: black;
+    color: white;
+}
+
+td.whiteCell {
+    background: white;
+    color: black;
+}
+
+#messagePar 
+{ 
+    text-align: center; 
+}
