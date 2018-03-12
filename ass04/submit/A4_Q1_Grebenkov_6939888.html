@@ -3,13 +3,47 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <title>Question 1</title>
         <style>
-            #boardTable { border: 1px solid black; border-collapse: collapse; margin-left: auto; margin-right: auto; }
-            td { border: 1px solid black; height: 20px; width: 20px; text-align: center; }
-            #messagePar { text-align: center; }
+            h1          
+            {  
+                text-align: center; 
+            }
+            
+            #boardTable 
+            { 
+                border: 1px solid black; 
+                border-collapse: collapse; 
+                margin-left: auto; 
+                margin-right: auto; 
+            }
+            
+            td          
+            { 
+                border: 3px solid white; 
+                height: 60px;
+                width: 60px; 
+                text-align: center; 
+                font-weight: bold;
+                font-size: 150%;
+            }
+            
+            .blackCell {
+                background: black;
+                color: white;
+            }
+            
+            .whiteCell {
+                background: white;
+                color: black;
+            }
+            
+            #messagePar 
+            { 
+                text-align: center; 
+            }
         </style>
         <script>
-            
             var board; // table body that represents the board
             var blankPosition; // [row, column] index array for the blank   
             var blankNode; // DOM node for the blank position
@@ -17,10 +51,9 @@
             // creates the board, registers the event listeners,
             // and populates the board 
             function start() {
-                // init the board by fetching the table
                 board = document.getElementById("boardBody");
 
-                var dimension = 4; // board dimension
+                var dimension = 4; 
                 
                 // create the table for the board
                 for (var i = 0; i < dimension; i++) {
@@ -30,6 +63,8 @@
                         var cell = document.createElement("td");
                         cell.addEventListener(
                             "mousedown", handleCellClick, false);
+                        cell.setAttribute("class", "blackCell");
+                        console.log(cell.getAttribute("class"));
                         row.appendChild(cell);
                     }
                     board.appendChild(row);
@@ -43,21 +78,24 @@
             // table with integers from 1 to 15
             function initBoard() {
                 // get a shuffled array of numbers from 0 to 15.
-                // 0 indicates the blank cell
+                // (0 indicates the blank cell)
                 var boardNumbers = getShuffledArray();
 
-                // used to index each cell from 0 to 15
+                // used to index each cell in boardNumbers
                 var cellIndex = 0; 
 
                 for (var row = 0; row < board.rows.length; row++) {
                     var rowCells = board.rows[row].cells;
+
                     for (var cell = 0; cell < rowCells.length; cell++) {
                         if (boardNumbers[cellIndex] !== 0) {
                             rowCells[cell].innerHTML = boardNumbers[cellIndex];
                         } else {
                             // save the position and node of the blank cell
+                            // and color it white
                             blankPosition = [row, cell];
                             blankNode = rowCells[cell];
+                            blankNode.setAttribute("class", "whiteCell");
                         } 
                         cellIndex++;
                     }
@@ -71,14 +109,16 @@
                 // cell and its parent row
                 var clickedCellNode = e.target;
                 var clickedRowNode = clickedCellNode.parentNode;
-                
+
                 // i, j gives us the coordinates of the clicked cell
                 var i = clickedRowNode.rowIndex;
                 var j = clickedCellNode.cellIndex; 
 
+                // coordinates of the blank cell
                 var blankRow = blankPosition[0];
                 var blankCell = blankPosition[1];
 
+                // div to display error messages for an invalid move
                 var messageDiv = document.getElementById("messageDiv");
                 
                 // make the move if it's valid
@@ -87,9 +127,15 @@
                      (j === blankCell && 
                      (i === blankRow-1 || i === blankRow+1)) ) {
                     // put the clicked number in the current blank node
+                    // and make it a black cell
                     blankNode.innerHTML = clickedCellNode.innerHTML;
+                    blankNode.setAttribute("class", "blackCell");
+
                     // clear the clicked node to make it blank
+                    // and make it a white cell
                     clickedCellNode.innerHTML = "";
+                    clickedCellNode.setAttribute("class", "whiteCell");
+
                     // save the node and position of the new blank node
                     blankNode = clickedCellNode;
                     blankPosition = [i, j];
@@ -98,10 +144,9 @@
                     messagePar.innerHTML ="<strong>Invalid move!</strong><br>" +
                         "You must click on a square adjacent to the blank one.";
                 }
-
             }
             
-            // returns an array with the numbers from 0 to 15 
+            // returns an array with numbers from 0 to 15 
             // in random order using the Fisher-Yates Shuffle algorithm
             function getShuffledArray() {
                 var nums = [];
@@ -133,6 +178,7 @@
     </head>
 
     <body>
+        <h1>15-Puzzle</h1>
         <table id="boardTable">
             <tbody id="boardBody"></tbody>
         </table> 
