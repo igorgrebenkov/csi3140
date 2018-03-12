@@ -1,0 +1,74 @@
+<!--TA1: the code does not handle incorrect inputs properly -->
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Question 3</title>
+        <script> 
+            var randomNum; // number user is trying to guess 
+            var numGuesses = 0; // keeps track of how many guesses are made
+
+            function start() {
+                var submitBtn = document.getElementById("submitBtn");
+                submitBtn.addEventListener("click", checkGuess, false);
+                initGame();
+            }
+            
+            function initGame() {
+                randomNum = getRandomInt();
+                numGuesses = 0;
+            }
+
+            function checkGuess() {
+                var userGuess = parseInt(
+                    document.getElementById("userGuess").value);
+                var outputDiv = document.getElementById("outputDiv");
+
+                // new for question 3
+                if (isNaN(userGuess) || userGuess < 1 || userGuess > 1000) {
+                    outputDiv.innerHTML = "Wrong input! " +
+                        "You should enter a number between 1 and 1000.";
+                } else {
+                    numGuesses++; 
+                }
+                
+                if (userGuess > randomNum) {
+                    outputDiv.innerHTML = "Too high. Try again.";
+                } else if (userGuess < randomNum) {
+                    outputDiv.innerHTML = "Too low. Try again.";
+                } else {
+                    outputDiv.innerHTML = "Congratulations. " + 
+                        "You guessed the number!"
+                    
+                    // new for question 3
+                    if (numGuesses < 10) {
+                        outputDiv.innerHTML += "<br>Either you know the " +
+                            "secret or you got lucky!";
+                    } else if (numGuesses > 10) {
+                        outputDiv.innerHTML += "<br>You should be able " +
+                            "to do better!";
+                    } else {
+                        outputDiv.innerHTML += "<br>Ahah! You know the secret!";
+                    }
+                    initGame(); // reset the game
+                }
+            }
+            
+            // Returns a random integer between 1 and 1000.
+            function getRandomInt() {
+                return Math.floor(1 + Math.random() * 1000);
+            }
+
+            window.addEventListener("load", start, false);
+        </script>
+    </head>
+    <body>
+        <h4>Guess a number between 1 and 1000.</h4>
+        <form action="#">
+            <input id="userGuess" type="text">
+            <input id="submitBtn" type="button" value="Submit"> 
+        </form>
+        <div id="outputDiv"></div>
+    </body>
+</html>

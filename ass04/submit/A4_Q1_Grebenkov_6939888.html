@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #boardTable { border: 1px solid black; border-collapse: collapse; margin-left: auto; margin-right: auto; }
+            td { border: 1px solid black; height: 20px; width: 20px; text-align: center; }
+        </style>
+        <script>
+            // table body that represents the board
+            var board; 
+
+            // creates the board, registers the event listeners,
+            // and populates the board 
+            function start() {
+                // init the board by fetching the table
+                board = document.getElementById("boardBody");
+
+                var dimension = 4; // board dimension
+                
+                // create the table for the board
+                for (var i = 0; i < dimension; i++) {
+                    var row = document.createElement("tr");
+
+                    for (var j = 0; j < dimension; j++) {
+                        var cell = document.createElement("td");
+                        row.appendChild(cell);
+                    }
+                    board.appendChild(row);
+                }
+                
+                // initialize the board by populating it with numbers
+                initBoard();
+            }
+            
+            // initializes the board by randomly populating the  
+            // table with integers from 1 to 15
+            function initBoard() {
+                // get a shuffled array of numbers from 0 to 15.
+                // 0 indicates the blank cell
+                var boardNumbers = getShuffledArray();
+
+                // used to index each cell from 0 to 15
+                var cellIndex = 0; 
+
+                for (var row = 0; row < board.rows.length; row++) {
+                    var rowCells = board.rows[row].cells;
+                    for (var cell = 0; cell < rowCells.length; cell++) {
+                        if (boardNumbers[cellIndex] !== 0) {
+                            rowCells[cell].innerHTML = boardNumbers[cellIndex];
+                        }
+                        cellIndex++;
+                    }
+                }
+            }
+            
+            // returns an array with the numbers from 0 to 15 
+            // in random order using the Fisher-Yates Shuffle algorithm
+            function getShuffledArray() {
+                var nums = [];
+                for (var i = 0; i <= 15; i++) {
+                    nums.push(i);
+                }
+                
+                var numsLength = nums.length;
+                
+                // shuffle with Fisher-Yates
+                for (var i = nums.length - 1; i >= 0; i--) {
+                    var j = randNum(i);
+                    var tmp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = tmp;
+                }
+
+                return nums;
+            }
+
+            // returns a random number between 0 and max
+            function randNum(max) {
+                return Math.floor(Math.random() * max);
+
+            }
+            
+            window.addEventListener("load", start, false);
+        </script>
+    </head>
+
+    <body>
+        <div id="test"></div>
+        <table id="boardTable">
+            <tbody id="boardBody"></tbody>
+        </table> 
+    </body>
+</html>

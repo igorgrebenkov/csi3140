@@ -1,0 +1,163 @@
+const RACE_LENGTH = 70; // length of the race.
+const LOWER = 0;        // index to lower range in move arrays
+const UPPER = 1;        // index to upper range in move arrays
+const MOVE = 2;         // index to actual move in move arrays
+
+/* 
+ * Simple objects that store move info for the tortoise and hare.
+ * For each array:
+ *   The 1st element is the lower bound
+ *   The 2nd element is the upper bound
+ *   The 3rd element is the actual move
+ */
+const tortoiseMoves = {
+    FAST_PLOD: [1, 5, 3],
+    SLIP: [6, 7, -6],
+    SLOW_PLOD: [8, 10, 1]
+};
+
+const hareMoves = {
+    SLEEP: [1, 2, 0],
+    BIG_HOP: [3, 4, 9],
+    BIG_SLIP: [5, 5, -12],
+    SMALL_HOP: [6, 8, 1],
+    SMALL_SLIP: [9, 10, -2]
+};
+
+var tortoisePos; // tortoise position
+var harePos;     // hare position
+var raceLength;  // length of the race
+var numTicks;    // counter for number of ticks in simulation
+
+function start() {
+    var startBtn = document.getElementById("startBtn");
+    startBtn.addEventListener("click", startRace, false);
+
+    initRace();
+}
+
+function initRace() {
+    tortoisePos = 1;
+    harePos = 1;
+    numTicks = 0;
+}
+
+// runs the simulation
+function startRace() {
+    var raceOutput = document.getElementById("raceOutput");
+    var randomNum; 
+
+    raceOutput.innerHTML = ""; // clear any prior output
+    raceOutput.innerHTML = "<p><strong>ON YOUR MARK, GET SET<br>" +
+        "BANG!!!<br>AND THEY'RE OFF!!!</strong><p>";
+    
+    // main loop
+    while (true) {
+        numTicks++;
+        randomNum = getRandomNum();
+        moveTortoise(randomNum);    
+        moveHare(randomNum);
+        printRace();
+        
+        // check if we have a winner
+        if ((tortoisePos + harePos >= RACE_LENGTH * 2) && 
+            (tortoisePos === harePos)) {
+            raceOutput.innerHTML += 
+                "<strong>IT'S A TIE.</strong><br>";
+            break;
+        } else if (tortoisePos >= RACE_LENGTH) {
+            raceOutput.innerHTML += 
+                "<strong>TORTOISE WINS!!! YAY!!!</strong><br>";
+            break;
+        } else if (harePos >= RACE_LENGTH) {
+            raceOutput.innerHTML += 
+                "<strong>HARE WINS. YUCK!</strong><br>";
+            break;
+        }
+    }
+    
+    // display stats and reset race
+    raceOutput.innerHTML += "<p><strong>Time Elapsed: " + 
+        numTicks + " ticks</strong><br>";
+    raceOutput.innerHTML += "<strong>Press 'Start Race' " + 
+        "to run again.</strong><br></p>";
+    initRace(); 
+}
+
+function moveTortoise(randNum) {
+    if (randNum >= tortoiseMoves.FAST_PLOD[LOWER] && 
+        randNum <= tortoiseMoves.FAST_PLOD[UPPER]) {
+        // fast plod
+        tortoisePos += tortoiseMoves.FAST_PLOD[MOVE];
+    } else if (randNum >= tortoiseMoves.SLIP[LOWER] && 
+               randNum <= tortoiseMoves.SLIP[UPPER]) {
+        // slip
+        tortoisePos += tortoiseMoves.SLIP[MOVE];
+    } else if (randNum >= tortoiseMoves.SLOW_PLOD[LOWER] && 
+               randNum <= tortoiseMoves.SLOW_PLOD[UPPER]) {
+        // slow plod
+        tortoisePos += tortoiseMoves.SLOW_PLOD[MOVE];
+    }
+ 
+    // check for slipping off the course
+    if (tortoisePos < 1) {
+        tortoisePos = 1;
+    }
+}
+
+function moveHare(randNum) {
+    if (randNum >= hareMoves.SLEEP[LOWER] && 
+        randNum <= hareMoves.SLEEP[UPPER]) {
+        // sleep
+        harePos += hareMoves.SLEEP[MOVE];
+    } else if (randNum >= hareMoves.BIG_HOP[LOWER] && 
+               randNum <= hareMoves.BIG_HOP[UPPER]) {
+        // big hop 
+        harePos += hareMoves.BIG_HOP[MOVE];
+    } else if (randNum >= hareMoves.BIG_SLIP[LOWER] && 
+               randNum <= hareMoves.BIG_SLIP[UPPER]) {
+        // big slip
+        harePos += hareMoves.BIG_SLIP[MOVE];
+    } else if (randNum >= hareMoves.SMALL_HOP[LOWER] && 
+               randNum <= hareMoves.SMALL_HOP[UPPER]) {
+        // small hop
+        harePos += hareMoves.SMALL_HOP[MOVE];
+    } else if (randNum >= hareMoves.SMALL_SLIP[LOWER] && 
+               randNum <= hareMoves.SMALL_SLIP[UPPER]) {
+        // small slip
+        harePos += hareMoves.SMALL_SLIP[MOVE];
+    }
+
+    // check for slipping off the course
+    if (harePos < 1) {
+        harePos = 1;
+    }
+}
+    
+// prints one iteration of the race
+function printRace() {
+    var raceOutput = document.getElementById("raceOutput");
+    var raceString = "";
+    
+    for (var i = 1; i <= RACE_LENGTH; i++) {
+        if (tortoisePos === harePos && 
+            tortoisePos === i) {
+            raceString += "OUCH!!!";
+        } else if (i === tortoisePos) {
+            raceString += "T";
+        } else if (i === harePos) {
+            raceString += "H";
+        } else {
+            raceString += " ";
+        }
+    }
+    raceString += "<br>"
+    raceOutput.innerHTML += raceString;
+}
+
+// returns a random integer between 1 and 10
+function getRandomNum() {
+    return Math.floor(1 + Math.random() * 10);
+}
+
+window.addEventListener("load", start, false);
