@@ -8,8 +8,10 @@
             td { border: 1px solid black; height: 20px; width: 20px; text-align: center; }
         </style>
         <script>
-            // table body that represents the board
-            var board; 
+            
+            var board; // table body that represents the board
+            var blankPosition; // [row, column] index array for the blank   
+            var blankNode; // DOM node for the blank position
 
             // creates the board, registers the event listeners,
             // and populates the board 
@@ -25,6 +27,8 @@
 
                     for (var j = 0; j < dimension; j++) {
                         var cell = document.createElement("td");
+                        cell.addEventListener(
+                            "mousedown", handleCellClick, false);
                         row.appendChild(cell);
                     }
                     board.appendChild(row);
@@ -33,7 +37,7 @@
                 // initialize the board by populating it with numbers
                 initBoard();
             }
-            
+
             // initializes the board by randomly populating the  
             // table with integers from 1 to 15
             function initBoard() {
@@ -49,9 +53,43 @@
                     for (var cell = 0; cell < rowCells.length; cell++) {
                         if (boardNumbers[cellIndex] !== 0) {
                             rowCells[cell].innerHTML = boardNumbers[cellIndex];
-                        }
+                        } else {
+                            // save the position and node of the blank cell
+                            blankPosition = [row, cell];
+                            blankNode = rowCells[cell];
+                        } 
                         cellIndex++;
                     }
+                }
+            }
+            
+            // handles 'mousedown' events for the table cells.
+            // implements swapping the empty cell with an adjacent one
+            function handleCellClick(e) {
+                // fetch the DOM nodes corresponding to the clicked 
+                // cell and its parent row
+                var clickedCellNode = e.target;
+                var clickedRowNode = clickedCellNode.parentNode;
+                
+                // i, j gives us the coordinates of the clicked cell
+                var i = clickedRowNode.rowIndex;
+                var j = clickedCellNode.cellIndex; 
+
+                var blankRow = blankPosition[0];
+                var blankCell = blankPosition[1];
+                
+                // make the move if it's valid
+                if ( (i === blankRow && 
+                     (j === blankCell-1 || j === blankCell+1)) || 
+                     (j === blankCell && 
+                     (i === blankRow-1 || i === blankRow+1)) ) {
+                    // put the clicked number in the current blank node
+                    blankNode.innerHTML = clickedCellNode.innerHTML;
+                    // clear the clicked node to make it blank
+                    clickedCellNode.innerHTML = "";
+                    // save the node and position of the new blank node
+                    blankNode = clickedCellNode;
+                    blankPosition = [i, j];
                 }
             }
             
