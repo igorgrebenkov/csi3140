@@ -4,18 +4,14 @@ var isMouseDown = false; // true if the mouse button is down
 
 function start() {
     image = document.getElementById("dragImage");
-
     image.addEventListener(
         "mousedown", 
         function(e) {
             // get initial client X,Y coordinates
-            var clientX = e.clientX;
-            var clientY = e.clientY;
-            lastClientXY = [clientX, clientY];
+            lastClientXY = [e.clientX, e.clientY];
             isMouseDown = true;
         }, 
         false);
-
     image.addEventListener(
         "mouseup", 
         function() {
