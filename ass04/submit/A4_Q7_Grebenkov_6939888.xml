@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="A4_Q7_Grebenkov_6939888.xsl"?>
+
+<nutritionFacts>
+    <foodItem>
+        <name>Grandma White's Cookies</name>
+        <servingSize>1 package</servingSize>
+        <totalCalories>260</totalCalories>
+        <fatCalories>100</fatCalories>
+        <fat>2</fat>
+        <saturatedFat>2</saturatedFat>
+        <cholesterol>5</cholesterol>
+        <sodium>210</sodium>
+        <carbohydrates>36</carbohydrates>
+        <fiber>2</fiber>
+        <sugar>15</sugar>
+        <protein>5</protein>
+    </foodItem>
+</nutritionFacts>
