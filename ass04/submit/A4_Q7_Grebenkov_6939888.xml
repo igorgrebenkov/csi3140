@@ -7,13 +7,13 @@
         <servingSize>1 package</servingSize>
         <totalCalories>260</totalCalories>
         <fatCalories>100</fatCalories>
-        <fat>2</fat>
-        <saturatedFat>2</saturatedFat>
-        <cholesterol>5</cholesterol>
-        <sodium>210</sodium>
-        <carbohydrates>36</carbohydrates>
-        <fiber>2</fiber>
-        <sugar>15</sugar>
-        <protein>5</protein>
+        <fat>11 g</fat>
+        <saturatedFat>2 g</saturatedFat>
+        <cholesterol>5 mg</cholesterol>
+        <sodium>210 mg</sodium>
+        <carbohydrates>36 g</carbohydrates>
+        <fiber>2 g</fiber>
+        <sugar>15 g</sugar>
+        <protein>5 g</protein>
     </foodItem>
 </nutritionFacts>
