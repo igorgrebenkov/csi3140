@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Question 5</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" height="200" width="500" style="border: 1px solid black;"></canvas>
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+
+            context.fillStyle = "blue";
+            context.textAlign = "center";
+            context.textBaseline="middle";
+            context.font = "italic 60px courier";
+            context.shadowBlur = 6;
+            context.shadowOffsetX = 2;
+            context.shadowOffsetY = 5;
+            context.shadowColor = "gray";
+            context.fillText("HTML5 Canvas", canvas.width/2, canvas.height/2);
+        </script>
+    </body>
+</html>
