@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Question 6</title>
+    </head>
+    <body>
+        <div id="centerDiv" style="text-align: center;">
+            <canvas id="myCanvas" height="500" width="500"></canvas>
+        </div>
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+
+            var gradient = context.createLinearGradient(250, 75, 250, 425);
+            gradient.addColorStop(0, "blue");
+            gradient.addColorStop(0.5, "yellow");
+            gradient.addColorStop(1, "red");
+
+            // draw a hexagon
+            context.beginPath();
+            context.moveTo(50, 250);
+            context.lineTo(150, 75);
+            context.lineTo(350, 75);
+            context.lineTo(450, 250);
+            context.lineTo(350, 425);
+            context.lineTo(150, 425);
+            context.lineTo(50, 250);
+            context.lineWidth = 10;
+            context.closePath();
+            context.fillStyle = gradient;
+            context.fill(); 
+            context.stroke();
+
+
+        </script>
+    </body>
+</html>
